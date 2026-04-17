@@ -98,7 +98,7 @@ class AppTheme {
         bodyMedium: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: colorScheme.onSurface),
         bodySmall: TextStyle(fontSize: 12, fontWeight: FontWeight.w400, color: colorScheme.onSurfaceVariant),
 
-        labelLarge: TextStyle(fontSize: 14, fontWeight: FontWeight.w500, color: colorScheme.onSurface),
+        labelLarge: TextStyle(fontSize: 14, fontWeight: FontWeight.w700, color: colorScheme.onSurface),
         labelMedium: TextStyle(fontSize: 12, fontWeight: FontWeight.w500, color: colorScheme.onSurface),
         labelSmall: TextStyle(fontSize: 11, fontWeight: FontWeight.w500, color: colorScheme.onSurfaceVariant),
       ),

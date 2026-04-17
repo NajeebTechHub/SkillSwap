@@ -14,4 +14,7 @@ class AppSizes {
   static const double logoSm = 24;
   static const double logoMd = 48;
   static const double logoLg = 96;
+
+  // Image
+  static const double imageMd = 70;
 }
