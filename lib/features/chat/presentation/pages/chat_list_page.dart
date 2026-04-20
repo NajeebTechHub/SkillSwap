@@ -31,115 +31,117 @@ class _ChatListPageState extends State<ChatListPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const SizedBox(height: AppSpacing.xl),
-          Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: AppSpacing.screenPadding,
+      body: SafeArea(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const SizedBox(height: AppSpacing.xl),
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: AppSpacing.screenPadding,
+              ),
+              child: Text(AppString.messages, style: context.appTextTheme.headlineSmall),
             ),
-            child: Text(AppString.messages, style: context.appTextTheme.headlineSmall),
-          ),
-          const SizedBox(height: AppSpacing.md),
-          Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: AppSpacing.screenPadding,
+            const SizedBox(height: AppSpacing.md),
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: AppSpacing.screenPadding,
+              ),
+              child: AppTextField(
+                controller: searchController,
+                hint: AppString.search,
+                prefixIcon: const Icon(CupertinoIcons.search),
+              ),
             ),
-            child: AppTextField(
-              controller: searchController,
-              hint: AppString.search,
-              prefixIcon: const Icon(CupertinoIcons.search),
-            ),
-          ),
-          const SizedBox(height: AppSpacing.xl),
-          Expanded(
-            child: ListView.builder(
-              itemCount: chats.length,
-              padding: EdgeInsets.zero,
-              itemBuilder: (context, index) {
-                final chat = chats[index];
-
-                return Column(
-                  children: [
-                    InkWell(
-                      onTap: () {
-                        context.push('${RouteNames.chatPage}/${chat.id}',extra: chat);
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: AppSpacing.screenPadding,
-                          vertical: AppSpacing.md,
-                        ),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Container(
-                              padding: const EdgeInsets.all(AppSpacing.md),
-                              decoration: BoxDecoration(
-                                gradient: LinearGradient(
-                                  colors: [context.colors.primary, context.colors.secondary],
+            const SizedBox(height: AppSpacing.xl),
+            Expanded(
+              child: ListView.builder(
+                itemCount: chats.length,
+                padding: EdgeInsets.zero,
+                itemBuilder: (context, index) {
+                  final chat = chats[index];
+        
+                  return Column(
+                    children: [
+                      InkWell(
+                        onTap: () {
+                          context.push('${RouteNames.chatPage}/${chat.id}',extra: chat);
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: AppSpacing.screenPadding,
+                            vertical: AppSpacing.md,
+                          ),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                padding: const EdgeInsets.all(AppSpacing.md),
+                                decoration: BoxDecoration(
+                                  gradient: LinearGradient(
+                                    colors: [context.colors.primary, context.colors.secondary],
+                                  ),
+                                  borderRadius: AppRadius.circleRadius,
                                 ),
-                                borderRadius: AppRadius.circleRadius,
-                              ),
-                              child: Text(
-                                'NJ',
-                                style: context.appTextTheme.titleSmall?.copyWith(
-                                  color: context.colors.surface,
+                                child: Text(
+                                  'NJ',
+                                  style: context.appTextTheme.titleSmall?.copyWith(
+                                    color: context.colors.surface,
+                                  ),
                                 ),
                               ),
-                            ),
-                            const SizedBox(width: AppSpacing.md),
-
-                            Expanded(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
+                              const SizedBox(width: AppSpacing.md),
+        
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(chat.name, style: context.appTextTheme.titleMedium),
+                                    Text(chat.role, style: context.appTextTheme.labelMedium),
+                                    const SizedBox(height: AppSpacing.xs),
+                                    Text(chat.lastMessage),
+                                  ],
+                                ),
+                              ),
+        
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.end,
                                 children: [
-                                  Text(chat.name, style: context.appTextTheme.titleMedium),
-                                  Text(chat.role, style: context.appTextTheme.labelMedium),
+                                  Text(chat.time),
                                   const SizedBox(height: AppSpacing.xs),
-                                  Text(chat.lastMessage),
-                                ],
-                              ),
-                            ),
-
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: [
-                                Text(chat.time),
-                                const SizedBox(height: AppSpacing.xs),
-                                chat.unread > 0 ? Container(
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: AppSpacing.sm,
-                                    vertical: AppSpacing.xs,
-                                  ),
-                                  decoration: BoxDecoration(
-                                    color: context.colors.primary,
-                                    borderRadius: BorderRadius.circular(AppSpacing.sm),
-                                  ),
-                                  child: Text(
-                                    chat.unread.toString(),
-                                    style: context.appTextTheme.labelSmall?.copyWith(
-                                      color: context.colors.surface,
+                                  chat.unread > 0 ? Container(
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: AppSpacing.sm,
+                                      vertical: AppSpacing.xs,
                                     ),
-                                  ),
-                                ) : const SizedBox.shrink(),
-                              ],
-                            )
-                          ],
+                                    decoration: BoxDecoration(
+                                      color: context.colors.primary,
+                                      borderRadius: BorderRadius.circular(AppSpacing.sm),
+                                    ),
+                                    child: Text(
+                                      chat.unread.toString(),
+                                      style: context.appTextTheme.labelSmall?.copyWith(
+                                        color: context.colors.surface,
+                                      ),
+                                    ),
+                                  ) : const SizedBox.shrink(),
+                                ],
+                              )
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                    Divider(
-                      height: 1,
-                      color: context.colors.outline.withValues(alpha: 0.5),)
-
-                  ],
-                );
-              },
+                      Divider(
+                        height: 1,
+                        color: context.colors.outline.withValues(alpha: 0.5),)
+        
+                    ],
+                  );
+                },
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

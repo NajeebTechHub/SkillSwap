@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:skill_swap/core/constants/app_radius.dart';
+import 'package:skill_swap/core/constants/app_sizes.dart';
 import 'package:skill_swap/core/constants/app_spacing.dart';
 import 'package:skill_swap/core/extensions/context_theme.dart';
 import 'package:skill_swap/core/widgets/app_image.dart';

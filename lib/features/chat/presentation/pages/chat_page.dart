@@ -8,10 +8,19 @@ import 'package:skill_swap/core/widgets/app_text_field.dart';
 import 'package:skill_swap/features/chat/model/chat_model.dart';
 import 'package:skill_swap/features/chat/model/message_model.dart';
 
-class ChatPage extends StatelessWidget {
+class ChatPage extends StatefulWidget {
   final List<MessageModel> messages;
   final ChatModel chat;
+
   const ChatPage({super.key, required this.messages, required this.chat});
+
+  @override
+  State<ChatPage> createState() => _ChatPageState();
+}
+
+class _ChatPageState extends State<ChatPage> {
+  final TextEditingController _messageController = TextEditingController();
+
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +62,7 @@ class ChatPage extends StatelessWidget {
                       height: AppSpacing.sm,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        color: context.customColors.success,
+                        color: widget.chat.online ? context.customColors.success : context.colors.outline,
                       ),
                     ),
                   ),
@@ -64,8 +73,8 @@ class ChatPage extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                  Text(chat.name, style: context.appTextTheme.titleMedium),
-                  Text('Online', style: context.appTextTheme.labelMedium?.copyWith(color: context.customColors.success))
+                  Text(widget.chat.name, style: context.appTextTheme.titleMedium),
+                  Text( widget.chat.online ? 'Online' : 'Offline', style: context.appTextTheme.labelMedium?.copyWith(color:widget.chat.online ? context.customColors.success : context.colors.outline))
               ],
             ),
           ],
@@ -80,26 +89,49 @@ class ChatPage extends StatelessWidget {
         bottom: PreferredSize(preferredSize: const Size.fromHeight(AppSpacing.md),
             child: Divider(color: context.colors.outline,)),
       ),
-      bottomNavigationBar: Container(
-        padding: const EdgeInsets.symmetric(horizontal: AppSpacing.screenPadding),
-        decoration: BoxDecoration(
-          border: Border(top: BorderSide(color: context.colors.outline, width: 1)),
-        ),
-        child: Row(
-          children: [
-            IconButton(
-              onPressed: () {},
-              icon: const Icon(Icons.attachment_rounded),
-            ),
-            // AppTextField(controller: controller),
-
-          ],
+      bottomNavigationBar: SafeArea(
+        top: false,
+        bottom: true,
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: AppSpacing.screenPadding,vertical: AppSpacing.screenPadding),
+          decoration: BoxDecoration(
+            border: Border(top: BorderSide(color: context.colors.outline, width: 1)),
+          ),
+          child: Row(
+            children: [
+              IconButton(
+                onPressed: () {},
+                icon: const Icon(Icons.attachment_rounded),
+              ),
+              const SizedBox(width: AppSpacing.xs,),
+              Flexible(
+                child: SizedBox(
+                  height: 45,
+                  child: AppTextField(
+                    controller: _messageController,
+                    fillColor: context.colors.outline.withValues(alpha: 0.3),
+                    hint: 'Type a message...',
+                    suffixIcon: const Icon(Icons.sticky_note_2),
+                  ),
+                ),
+              ),
+              const SizedBox(width: AppSpacing.sm,),
+              Container(
+                padding: const EdgeInsets.all(AppSpacing.sm),
+                decoration: BoxDecoration(
+                  color: context.colors.primary,
+                  borderRadius: AppRadius.smRadius
+                ),
+                child: Icon(Icons.send,color: context.colors.surface,),
+              )
+            ],
+          ),
         ),
       ),
       body: ListView.separated(
-        itemCount: messages.length,
+        itemCount: widget.messages.length,
           itemBuilder: (context,index){
-          final message = messages[index];
+          final message = widget.messages[index];
 
            return Padding(
              padding: const EdgeInsets.symmetric(horizontal: AppSpacing.screenPadding),
@@ -118,6 +150,7 @@ class ChatPage extends StatelessWidget {
                      Text(message.text, style: context.appTextTheme.bodyMedium?.copyWith(color: message.sender == 'user' ? context.colors.surface : context.colors.onSurface)),
                      const SizedBox(height: AppSpacing.xs),
                      Text(message.time, style: context.appTextTheme.labelMedium?.copyWith(color: message.sender == 'user' ? context.colors.surface : context.colors.onSurface)),
+
                    ],
                  ),
                ),

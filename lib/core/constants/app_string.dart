@@ -25,6 +25,7 @@ class AppString {
   static const createAccount = 'Create Account';
   static const joinSkillSwap = 'Join SkillSwap to find your mentor';
   static const agreeToTerms = 'I agree to the Terms of Service and Privacy Policy';
+  static const logout = 'Log Out';
 
   // Bottom Navigation Strings
   static const home = 'Home';
@@ -58,4 +59,13 @@ class AppString {
   static const search = 'Search Conversations...';
 
 
+  // Notification Strings
+  static const notifications = 'Notifications';
+  static const markAllRead = 'Mark all read';
+  static const today = 'Today';
+  static const earlier = 'Earlier';
+  static const newBadge = 'New';
+
+  // Profile Strings
+  static const version = 'Version 1.0.0';
 }
