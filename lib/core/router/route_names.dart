@@ -4,8 +4,10 @@ class RouteNames {
   static const signup = '/signup';
   static const verification = '/verification';
   static const home = '/home';
-  static const chat = '/chat';
+  static const chatList = '/chatList';
   static const alert = '/alert';
   static const profile = '/profile';
   static const bottomNavBar = '/bottomNavBar';
+  static const mentorDetails = '/mentorDetailsPage';
+  static const chatPage = '/chatPage';
 }

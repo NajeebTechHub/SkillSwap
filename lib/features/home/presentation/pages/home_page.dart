@@ -71,7 +71,8 @@ class _HomePageState extends State<HomePage> {
                     ],
                   ),
                   const SizedBox(height: AppSpacing.md),
-                  TopRated(featuredMentors: featuredMentors)
+                  TopRated(featuredMentors: featuredMentors),
+                  const SizedBox(height: AppSpacing.xl),
                 ],
               ),
             ),

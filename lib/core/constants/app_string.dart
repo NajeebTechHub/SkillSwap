@@ -40,4 +40,22 @@ class AppString {
   static const topRated = 'Top Rated';
   static const seeAll = 'See All';
 
+
+  // Mentor Details Strings
+  static const about = 'About';
+  static const expertise = 'Expertise';
+  static const education = 'Education';
+  static const languages = 'Languages';
+  static const reviews = 'Reviews';
+  static const years = 'years';
+  static const students = 'students';
+  static const hours = 'hours';
+  static const rating = 'rating';
+  static const bookSession = 'Book Session';
+
+  // Chat Strings
+  static const messages = 'Messages';
+  static const search = 'Search Conversations...';
+
+
 }
