@@ -49,9 +49,9 @@ class AppString {
   static const languages = 'Languages';
   static const reviews = 'Reviews';
   static const years = 'years';
-  static const students = 'students';
-  static const hours = 'hours';
-  static const rating = 'rating';
+  static const students = 'Students';
+  static const hours = 'Hours';
+  static const rating = 'Rating';
   static const bookSession = 'Book Session';
 
   // Chat Strings
@@ -68,4 +68,7 @@ class AppString {
 
   // Profile Strings
   static const version = 'Version 1.0.0';
+  static const editProfile = 'Edit Profile';
+  static const sessions = 'Sessions';
+  static const mentors = 'Mentors';
 }

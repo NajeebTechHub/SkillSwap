@@ -6,9 +6,11 @@ import 'package:skill_swap/core/constants/app_spacing.dart';
 import 'package:skill_swap/core/constants/app_string.dart';
 import 'package:skill_swap/core/extensions/context_theme.dart';
 import 'package:skill_swap/core/widgets/app_button.dart';
+import 'package:skill_swap/features/profile/models/states_model.dart';
 
 class ProfileHeader extends StatelessWidget {
-  const ProfileHeader({super.key});
+  final List<StatesModel> states;
+  const ProfileHeader({super.key, required this.states});
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +34,7 @@ class ProfileHeader extends StatelessWidget {
             decoration: BoxDecoration(
               color: context.colors.surface,
               borderRadius: AppRadius.mdRadius,
-              border: Border.all(color: context.colors.outline.withValues(alpha: 0.5))
+              border: Border.all(color: context.colors.outline.withValues(alpha: 0.8))
             ),
             child: Column(
               children: [
@@ -83,15 +85,61 @@ class ProfileHeader extends StatelessWidget {
                     text: 'Edit Profile',
                     textColor: context.colors.onSurface,
                     backgroundColor: context.colors.surface,
-                    borderColor: context.colors.secondary,
+                    outlined: true,
+                    borderColor: context.colors.outline.withValues(alpha: 0.5),
                     splashColor: context.colors.secondary,
                     highlightColor: context.colors.secondary,
                     onPressed: (){})
               ],
             ),
+          ),
+
+          const SizedBox(height: AppSpacing.xl,),
+
+          Row(
+            children: states.map((e) {
+              return Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.only(right: AppSpacing.sm),
+                  child: StateCard(
+                    count: e.count,
+                    label: e.label,
+                  ),
+                ),
+              );
+            }).toList(),
           )
+
+
         ],
       ),
     );
   }
 }
+
+class StateCard extends StatelessWidget {
+  final int count;
+  final String label;
+  
+  const StateCard({super.key, required this.count, required this.label});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(AppSpacing.xl),
+      decoration: BoxDecoration(
+        color: context.colors.surface,
+        borderRadius: AppRadius.mdRadius,
+        border: Border.all(color: context.colors.outline.withValues(alpha: 0.8))
+      ),
+      child: Column(
+        children: [
+          Text(count.toString(),style: context.appTextTheme.labelLarge,),
+          const SizedBox(height: AppSpacing.sm,),
+          Text(label,style: context.appTextTheme.labelSmall,)
+        ],
+      ),
+    );
+  }
+}
+
