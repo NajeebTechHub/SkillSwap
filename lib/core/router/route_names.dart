@@ -10,4 +10,5 @@ class RouteNames {
   static const bottomNavBar = '/bottomNavBar';
   static const mentorDetails = '/mentorDetailsPage';
   static const chatPage = '/chatPage';
+  static const bookSession = '/bookSession';
 }

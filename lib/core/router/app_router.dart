@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:skill_swap/core/router/route_names.dart';
 import 'package:skill_swap/features/alert/presentation/pages/alert_page.dart';
@@ -8,11 +7,9 @@ import 'package:skill_swap/features/chat/data/messages_data.dart';
 import 'package:skill_swap/features/chat/presentation/pages/chat_list_page.dart';
 import 'package:skill_swap/features/chat/presentation/pages/chat_page.dart';
 import 'package:skill_swap/features/home/data/mentor_data.dart';
-import 'package:skill_swap/features/home/models/mentor_model.dart';
 import 'package:skill_swap/features/home/presentation/pages/home_page.dart';
 import 'package:skill_swap/features/home/presentation/pages/mentor_details_page.dart';
 import 'package:skill_swap/features/profile/presentation/pages/profile_page.dart';
-
 import 'package:skill_swap/features/auth/presentation/pages/login/login_page.dart';
 import 'package:skill_swap/features/auth/presentation/pages/signup/signup_page.dart';
 import 'package:skill_swap/features/auth/presentation/pages/verification/verification_page.dart';
@@ -52,6 +49,7 @@ final GoRouter router = GoRouter(
             return MentorDetailsPage(featuredMentors: mentor);
           },
       ),
+
       GoRoute(
           path: '${RouteNames.chatPage}/:id',
           builder: (context, state){
