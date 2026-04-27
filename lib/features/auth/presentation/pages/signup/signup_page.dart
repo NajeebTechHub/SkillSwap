@@ -88,7 +88,9 @@ class _SignupPageState extends State<SignupPage> {
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: AppSpacing.screenPadding),
-          child: Column(
+          child: Form(
+              key: _formKey,
+              child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // SizedBox(height: AppSpacing.xxxl,),
@@ -130,9 +132,9 @@ class _SignupPageState extends State<SignupPage> {
                       materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                       visualDensity: VisualDensity.compact,
                       value: _agreeToTerms, onChanged: (value){
-                        setState(() {
-                          _agreeToTerms = value ?? false;
-                        });
+                    setState(() {
+                      _agreeToTerms = value ?? false;
+                    });
                   }),
                   // SizedBox(width: AppSpacing.xs,),
                   Text(AppString.agreeToTerms,style: context.appTextTheme.labelMedium?.copyWith(color: context.colors.onSurfaceVariant),),
@@ -185,7 +187,7 @@ class _SignupPageState extends State<SignupPage> {
               ),
 
             ],
-          ),
+          )),
         ),
       ),
     );
