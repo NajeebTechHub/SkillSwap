@@ -97,6 +97,7 @@ class _SignupPageState extends State<SignupPage> {
               const SizedBox(height: AppSpacing.sm,),
               AppButton(text: AppString.createAccount, onPressed: (){
                 context.go(RouteNames.home);
+
               }),
               const SizedBox(height: AppSpacing.xl,),
               Row(

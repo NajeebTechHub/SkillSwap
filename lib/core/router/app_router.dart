@@ -49,6 +49,14 @@ final GoRouter router = GoRouter(
             return MentorDetailsPage(featuredMentors: mentor);
           },
       ),
+      GoRoute(
+          path: RouteNames.bookSession,
+          builder: (context, state){
+            final id = state.pathParameters['id'];
+            final mentor = MentorData.mentors.firstWhere((m) => m.id == id);
+            return MentorDetailsPage(featuredMentors: mentor);
+          }
+      ),
 
       GoRoute(
           path: '${RouteNames.chatPage}/:id',
