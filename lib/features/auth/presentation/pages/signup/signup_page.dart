@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 import 'package:skill_swap/core/constants/app_sizes.dart';
 import 'package:skill_swap/core/constants/app_spacing.dart';
 import 'package:skill_swap/core/constants/app_string.dart';
 import 'package:skill_swap/core/extensions/context_theme.dart';
+import 'package:skill_swap/core/utils/form_validators.dart';
 import 'package:skill_swap/core/widgets/app_text_field.dart';
+import 'package:skill_swap/core/widgets/app_toast.dart';
 import 'package:skill_swap/core/widgets/logo_widget.dart';
 import 'package:skill_swap/core/router/route_names.dart';
 import 'package:skill_swap/core/widgets/app_button.dart';
+import 'package:skill_swap/features/auth/presentation/controller/auth_controller.dart';
 
 class SignupPage extends StatefulWidget {
   const SignupPage({super.key});
@@ -19,9 +23,11 @@ class SignupPage extends StatefulWidget {
 
 class _SignupPageState extends State<SignupPage> {
 
+  final _formKey = GlobalKey<FormState>();
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  bool _agreeToTerms = false;
 
   @override
   void dispose() {
@@ -31,8 +37,33 @@ class _SignupPageState extends State<SignupPage> {
     super.dispose();
   }
 
+  Future<void> _onSignUp()async{
+    if(!_formKey.currentState!.validate()) return;
+
+    if(!_agreeToTerms){
+      AppToast.showToast(message: 'Please agree to terms & conditions');
+      return;
+    }
+
+    final controller = context.read<AuthController>();
+    final success = await controller.signUp(
+        _nameController.text.trim(),
+        _emailController.text.trim(),
+        _passwordController.text.trim()
+    );
+
+    if(!mounted) return;
+
+    if(success){
+      context.go(RouteNames.home);
+    }else{
+      AppToast.showToast(message: controller.errorMessage ?? 'Sign up failed');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    final isLoading = context.watch<AuthController>().isLoading;
 
     return Scaffold(
       appBar: AppBar(
@@ -73,15 +104,24 @@ class _SignupPageState extends State<SignupPage> {
               const SizedBox(height: AppSpacing.lg,),
               Text(AppString.fullName,style: context.appTextTheme.labelLarge,),
               const SizedBox(height: AppSpacing.xs,),
-              AppTextField(controller: _nameController, hint: 'Enter your full name',),
+              AppTextField(
+                controller: _nameController, hint: 'Enter your full name',
+                validator: (v) => FormValidators.validateRequiredFields(v),
+              ),
               const SizedBox(height: AppSpacing.md,),
               Text(AppString.email,style: context.appTextTheme.labelLarge,),
               const SizedBox(height: AppSpacing.xs,),
-              AppTextField(controller: _emailController,hint: 'your.email@example.com', ),
+              AppTextField(
+                controller: _emailController,hint: 'your.email@example.com',
+                validator: (v) => FormValidators.validateEmail(v),
+              ),
               const SizedBox(height: AppSpacing.md,),
               Text(AppString.password,style: context.appTextTheme.labelLarge,),
               const SizedBox(height: AppSpacing.xs,),
-              AppTextField(controller: _passwordController, hint: 'your password',),
+              AppTextField(
+                controller: _passwordController, hint: 'your password',
+                validator: (v) => FormValidators.validateRequiredFields(v),
+              ),
               const SizedBox(height: AppSpacing.lg,),
               Row(
                 mainAxisSize: MainAxisSize.min,
@@ -89,16 +129,17 @@ class _SignupPageState extends State<SignupPage> {
                   Checkbox(
                       materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                       visualDensity: VisualDensity.compact,
-                      value: false, onChanged: (value){}),
+                      value: _agreeToTerms, onChanged: (value){
+                        setState(() {
+                          _agreeToTerms = value ?? false;
+                        });
+                  }),
                   // SizedBox(width: AppSpacing.xs,),
                   Text(AppString.agreeToTerms,style: context.appTextTheme.labelMedium?.copyWith(color: context.colors.onSurfaceVariant),),
                 ],
               ),
               const SizedBox(height: AppSpacing.sm,),
-              AppButton(text: AppString.createAccount, onPressed: (){
-                context.go(RouteNames.home);
-
-              }),
+              AppButton(text: AppString.createAccount, onPressed: isLoading ? null : _onSignUp),
               const SizedBox(height: AppSpacing.xl,),
               Row(
                 children: [

@@ -14,6 +14,7 @@ import 'package:skill_swap/features/auth/presentation/pages/login/login_page.dar
 import 'package:skill_swap/features/auth/presentation/pages/signup/signup_page.dart';
 import 'package:skill_swap/features/auth/presentation/pages/verification/verification_page.dart';
 import 'package:skill_swap/features/onboarding/presentation/pages/onboarding_pages.dart';
+import 'package:skill_swap/features/session/presentation/pages/book_session_page.dart';
 import 'package:skill_swap/features/splash/presentation/splash_page.dart';
 
 final GoRouter router = GoRouter(
@@ -56,6 +57,17 @@ final GoRouter router = GoRouter(
             final mentor = MentorData.mentors.firstWhere((m) => m.id == id);
             return MentorDetailsPage(featuredMentors: mentor);
           }
+      ),
+      GoRoute(
+          path: '${RouteNames.bookSession}/:id',
+        builder: (context, state){
+            final id = state.pathParameters['id'];
+
+            final mentor = MentorData.mentors.firstWhere((m) => m.id == id);
+
+            return BookSessionPage(mentor: mentor,);
+        }
+
       ),
 
       GoRoute(

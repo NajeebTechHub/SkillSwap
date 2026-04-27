@@ -71,4 +71,16 @@ class AppString {
   static const editProfile = 'Edit Profile';
   static const sessions = 'Sessions';
   static const mentors = 'Mentors';
+
+  // Book Session Strings
+  static const bookASession = 'Book a Session';
+  static const selectYourDataTime = 'Book your preferred date and time';
+  static const selectDate = 'Select Date';
+  static const availableTime = 'Available Times';
+  static const sessionSummary = 'Session Summary';
+  static const duration = 'Duration';
+  static const date = 'Date';
+  static const time = 'Time';
+  static const totalPrice = 'Total';
+  static const continueToPayment = 'Continue to Payment';
 }

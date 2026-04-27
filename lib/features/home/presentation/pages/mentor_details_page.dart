@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:skill_swap/core/constants/app_radius.dart';
 import 'package:skill_swap/core/constants/app_spacing.dart';
 import 'package:skill_swap/core/constants/app_string.dart';
 import 'package:skill_swap/core/extensions/context_theme.dart';
+import 'package:skill_swap/core/router/route_names.dart';
 import 'package:skill_swap/core/widgets/app_button.dart';
 import 'package:skill_swap/core/widgets/app_image.dart';
 import 'package:skill_swap/features/home/models/mentor_model.dart';
@@ -31,7 +33,9 @@ class MentorDetailsPage extends StatelessWidget {
           decoration: BoxDecoration(
             border: Border(top: BorderSide(color: context.colors.outline)),
           ),
-          child: AppButton(text: AppString.bookSession, onPressed: (){})),
+          child: AppButton(text: AppString.bookSession, onPressed: (){
+            context.push('${RouteNames.bookSession}/${featuredMentors.id}');
+          })),
       body: Column(
         children: [
           AspectRatio(

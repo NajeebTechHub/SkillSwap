@@ -16,6 +16,7 @@ class MentorModel {
   final int hours;
   final String education;
   final List<String> languages;
+  final List<String> availableTimes;
 
   MentorModel({
     required this.id,
@@ -35,6 +36,7 @@ class MentorModel {
     required this.hours,
     required this.education,
     required this.languages,
+    required this.availableTimes
   });
 
   MentorModel copyWith({
@@ -55,6 +57,7 @@ class MentorModel {
     int? hours,
     String? education,
     List<String>? languages,
+    List<String>? availableTimes,
   }) {
     return MentorModel(
       id: id ?? this.id,
@@ -74,6 +77,7 @@ class MentorModel {
       hours: hours ?? this.hours,
       education: education ?? this.education,
       languages: languages ?? this.languages,
+      availableTimes: availableTimes ?? this.availableTimes
     );
   }
 }
