@@ -122,7 +122,7 @@ class _SignupPageState extends State<SignupPage> {
               const SizedBox(height: AppSpacing.xs,),
               AppTextField(
                 controller: _passwordController, hint: 'your password',
-                validator: (v) => FormValidators.validateRequiredFields(v),
+                validator: (v) => FormValidators.validateStrongPassword(v),
               ),
               const SizedBox(height: AppSpacing.lg,),
               Row(
@@ -141,7 +141,7 @@ class _SignupPageState extends State<SignupPage> {
                 ],
               ),
               const SizedBox(height: AppSpacing.sm,),
-              AppButton(text: AppString.createAccount, onPressed: isLoading ? null : _onSignUp),
+              AppButton(text: AppString.createAccount,isLoading: isLoading, onPressed: isLoading ? null : _onSignUp),
               const SizedBox(height: AppSpacing.xl,),
               Row(
                 children: [
@@ -153,8 +153,7 @@ class _SignupPageState extends State<SignupPage> {
                   const Expanded(child: Divider())
                 ],
               ),
-              const SizedBox(height: AppSpacing.xl,),
-              Row(
+                Row(
                 children: [
                   Expanded(
                     child: AppButton(
@@ -185,7 +184,6 @@ class _SignupPageState extends State<SignupPage> {
                   ),
                 ],
               ),
-
             ],
           )),
         ),

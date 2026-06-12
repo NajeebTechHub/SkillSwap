@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:skill_swap/core/theme/app_colors.dart';
 import 'package:skill_swap/features/profile/models/menu_model.dart';
 
@@ -27,12 +28,17 @@ class MenuData {
     MenuModel(
         label: 'Settings',
         icon: CupertinoIcons.settings,
-        color: AppColors.muted
+        color: AppColors.outline
     ),
     MenuModel(
         label: 'Help & Support',
         icon: CupertinoIcons.question_circle,
         color: AppColors.purple600
+    ),
+    MenuModel(
+        label: 'Log Out',
+        icon: Icons.logout,
+        color: AppColors.error
     ),
   ];
 }

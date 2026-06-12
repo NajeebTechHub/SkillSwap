@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:skill_swap/core/app_root/app_state_provider.dart';
 import 'package:skill_swap/core/router/app_router.dart' as AppRouter;
+import 'package:skill_swap/core/services/app_storage_service.dart';
 import 'package:skill_swap/core/services/supabase_service.dart';
 import 'package:skill_swap/core/theme/app_theme.dart';
 import 'package:skill_swap/features/auth/presentation/controller/auth_controller.dart';
@@ -27,9 +29,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(
-          create: (context) => AuthController()..initUser(),
-        ),
+        Provider<AppStorageService>(create: (_) => AppStorageService(),),
+        ChangeNotifierProvider(create: (context) => AuthController()..initUser(),),
+        ChangeNotifierProvider<AppStateProvider>(create: (context) => AppStateProvider(context.read<AppStorageService>())),
         ChangeNotifierProvider(create: (context) => AuthController()),
       ],
       child: MaterialApp.router(

@@ -107,7 +107,7 @@ class _LoginPageState extends State<LoginPage> {
                   child:Text(AppString.forgotPassword,style: context.appTextTheme.labelLarge?.copyWith(color: context.colors.primary),),
                 ),
                 const SizedBox(height: AppSpacing.xxl,),
-                AppButton(text: AppString.signIn, onPressed: isLoading ? null : _onSignIn),
+                AppButton(text: AppString.signIn,isLoading: isLoading, onPressed: isLoading ? null : _onSignIn),
                 const SizedBox(height: AppSpacing.xl,),
                 Row(
                   children: [

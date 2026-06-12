@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
+import 'package:skill_swap/core/app_root/app_state_provider.dart';
 import 'package:skill_swap/core/constants/app_radius.dart';
 import 'package:skill_swap/core/constants/app_sizes.dart';
 import 'package:skill_swap/core/constants/app_spacing.dart';
@@ -25,18 +27,30 @@ class _OnboardingPagesState extends State<OnboardingPages> {
 
   final slides = OnboardingData.slides;
 
-  void next() {
+  void next() async{
     if (currentIndex < slides.length - 1) {
       _controller.nextPage(
         duration: AppDurations.normal,
         curve: Curves.easeInOut,
       );
     } else {
+      final storage = context.read<AppStateProvider>();
+
+      await storage.storage.setOnboardingCompleted();
+
+      storage.completeOnboarding();
+
       context.go(RouteNames.login);
     }
   }
 
-  void skip() {
+  void skip() async{
+    final storage = context.read<AppStateProvider>();
+
+    await storage.storage.setOnboardingCompleted();
+
+    storage.completeOnboarding();
+
     context.go(RouteNames.login);
   }
 

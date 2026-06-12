@@ -21,4 +21,22 @@ class FormValidators {
 
     return null;
   }
+
+  static String? validateStrongPassword(String? value) {
+    if (value == null || value.trim().isEmpty) {
+      return 'Password is required';
+    }
+
+    final password = value.trim();
+
+    final regex = RegExp(
+      r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$',
+    );
+
+    if (!regex.hasMatch(password)) {
+      return 'Min 8 chars, upper, lower, number & symbol';
+    }
+
+    return null;
+  }
 }

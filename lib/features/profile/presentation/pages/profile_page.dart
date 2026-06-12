@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:skill_swap/core/constants/app_radius.dart';
 import 'package:skill_swap/core/constants/app_sizes.dart';
 import 'package:skill_swap/core/constants/app_spacing.dart';
-import 'package:skill_swap/core/constants/app_string.dart';
 import 'package:skill_swap/core/extensions/context_theme.dart';
 import 'package:skill_swap/features/profile/data/menu_data.dart';
 import 'package:skill_swap/features/profile/data/states_data.dart';
@@ -15,7 +14,7 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final states = StatesData.states;
-    final menus = MenuData.menus;
+    final   menus = MenuData.menus;
     return Scaffold(
       body: Column(
         children: [
