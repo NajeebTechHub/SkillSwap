@@ -27,7 +27,6 @@ class AppStateProvider extends ChangeNotifier{
   }
 
   void completeOnboarding(){
-    _status = AppStatus.unauthenticated;
-    notifyListeners();
+    initApp();
   }
 }

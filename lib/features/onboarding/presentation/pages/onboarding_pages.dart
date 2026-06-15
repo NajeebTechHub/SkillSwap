@@ -34,24 +34,24 @@ class _OnboardingPagesState extends State<OnboardingPages> {
         curve: Curves.easeInOut,
       );
     } else {
-      final storage = context.read<AppStateProvider>();
+      final appState = context.read<AppStateProvider>();
 
-      await storage.storage.setOnboardingCompleted();
+      await appState.storage.setOnboardingCompleted();
 
-      storage.completeOnboarding();
+      appState.completeOnboarding();
 
-      context.go(RouteNames.login);
+      // context.go(RouteNames.login);
     }
   }
 
   void skip() async{
-    final storage = context.read<AppStateProvider>();
+    final appState = context.read<AppStateProvider>();
 
-    await storage.storage.setOnboardingCompleted();
+    await appState.storage.setOnboardingCompleted();
 
-    storage.completeOnboarding();
+    appState.completeOnboarding();
 
-    context.go(RouteNames.login);
+    // context.go(RouteNames.login);
   }
 
   @override
