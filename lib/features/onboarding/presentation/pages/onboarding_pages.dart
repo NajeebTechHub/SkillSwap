@@ -38,9 +38,9 @@ class _OnboardingPagesState extends State<OnboardingPages> {
 
       await appState.storage.setOnboardingCompleted();
 
-      appState.completeOnboarding();
+      if(!mounted) return;
 
-      // context.go(RouteNames.login);
+      context.go(RouteNames.login);
     }
   }
 
@@ -49,9 +49,9 @@ class _OnboardingPagesState extends State<OnboardingPages> {
 
     await appState.storage.setOnboardingCompleted();
 
-    appState.completeOnboarding();
+    if(!mounted) return;
 
-    // context.go(RouteNames.login);
+    context.go(RouteNames.login);
   }
 
   @override

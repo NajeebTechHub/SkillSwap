@@ -37,7 +37,7 @@ class _SplashPageState extends State<SplashPage> with SingleTickerProviderStateM
 
     Future.delayed(AppDurations.splashDelay,(){
       if(!mounted) return;
-      context.go(RouteNames.onboarding);
+      context.go(RouteNames.appRoot);
     });
   }
 

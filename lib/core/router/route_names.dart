@@ -1,4 +1,5 @@
 class RouteNames {
+  static const appRoot = '/appRoot';
   static const onboarding = '/onboarding';
   static const login = '/login';
   static const signup = '/signup';

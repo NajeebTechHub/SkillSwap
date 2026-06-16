@@ -1,4 +1,5 @@
 import 'package:go_router/go_router.dart';
+import 'package:skill_swap/core/app_root/app_root.dart';
 import 'package:skill_swap/core/router/route_names.dart';
 import 'package:skill_swap/features/alert/presentation/pages/alert_page.dart';
 import 'package:skill_swap/features/bottom_navigation/pages/bottom_navbar.dart';
@@ -23,6 +24,10 @@ final GoRouter router = GoRouter(
       GoRoute(
           path: '/',
           builder: (context, state) => const SplashPage(),
+      ),
+      GoRoute(
+        path: RouteNames.appRoot,
+        builder: (context, state) => const AppRoot(),
       ),
       GoRoute(
           path: RouteNames.onboarding,

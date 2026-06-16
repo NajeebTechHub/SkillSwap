@@ -28,6 +28,7 @@ class _SignupPageState extends State<SignupPage> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   bool _agreeToTerms = false;
+  bool _obscureText = true;
 
   @override
   void dispose() {
@@ -122,6 +123,12 @@ class _SignupPageState extends State<SignupPage> {
               const SizedBox(height: AppSpacing.xs,),
               AppTextField(
                 controller: _passwordController, hint: 'your password',
+                obscureText: _obscureText,
+                suffixIcon: IconButton(onPressed: (){
+                  setState(() {
+                    _obscureText =! _obscureText;
+                  });
+                }, icon: Icon(_obscureText ? Icons.visibility_off : Icons.visibility)),
                 validator: (v) => FormValidators.validateStrongPassword(v),
               ),
               const SizedBox(height: AppSpacing.lg,),
@@ -150,10 +157,11 @@ class _SignupPageState extends State<SignupPage> {
                     padding: const EdgeInsets.symmetric(horizontal: AppSpacing.sm),
                     child: Text(AppString.orContinueWith,style: context.appTextTheme.labelMedium?.copyWith(color: context.colors.onSurfaceVariant),),
                   ),
-                  const Expanded(child: Divider())
+                  const Expanded(child: Divider()),
                 ],
               ),
-                Row(
+              const SizedBox(height: AppSpacing.sm,),
+              Row(
                 children: [
                   Expanded(
                     child: AppButton(

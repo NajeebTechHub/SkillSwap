@@ -7,12 +7,11 @@ class AppStorageService {
 
   Future<SharedPreferences> get _prefs => SharedPreferences.getInstance();
 
-  Future<void> setOnboardingCompleted() async{
+  Future<void> setOnboardingCompleted()async{
     final prefs = await _prefs;
     await prefs.setBool(_onboardingKey, true);
   }
-
-  Future<bool> isOnboardingCompleted() async{
+  Future<bool> isOnboardingCompleted()async{
     final prefs = await _prefs;
     return prefs.getBool(_onboardingKey) ?? false;
   }

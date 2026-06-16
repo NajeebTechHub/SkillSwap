@@ -26,6 +26,8 @@ class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  
+  bool _obscureText = true;
 
   @override
   void dispose() {
@@ -99,7 +101,13 @@ class _LoginPageState extends State<LoginPage> {
                 Text(AppString.password,style: context.appTextTheme.labelLarge,),
                 const SizedBox(height: AppSpacing.xs,),
                 AppTextField(controller: _passwordController, hint: 'your password',
-                validator: (v) => FormValidators.validateRequiredFields(v),
+                obscureText: _obscureText,
+                suffixIcon:  IconButton(onPressed: (){
+                  setState(() {
+                    _obscureText =! _obscureText;
+                  });
+                }, icon: Icon(_obscureText ? Icons.visibility_off : Icons.visibility)),
+                validator: (v) => FormValidators.validateStrongPassword(v),
                 ),
                 const SizedBox(height: AppSpacing.md,),
                 Align(
