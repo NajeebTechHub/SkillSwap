@@ -98,7 +98,6 @@ class ProfilePage extends StatelessWidget {
               TextButton(onPressed: ()async{
                 context.pop();
                 await context.read<AuthController>().signOut();
-                context.go(RouteNames.login);
               }, child: const Text('Logout'))
             ],
           );

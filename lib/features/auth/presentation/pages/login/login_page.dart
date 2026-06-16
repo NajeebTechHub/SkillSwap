@@ -44,9 +44,7 @@ class _LoginPageState extends State<LoginPage> {
 
     if(!mounted) return;
 
-    if(success) {
-      context.go(RouteNames.home);
-    }else{
+    if(!success){
       AppToast.showToast(message: controller.errorMessage ?? 'Sign in failed');
     }
   }

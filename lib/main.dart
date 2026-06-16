@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         Provider<AppStorageService>(create: (context) => AppStorageService()),
-        ChangeNotifierProvider(create: (context) => AuthController()..initUser(),),
+        ChangeNotifierProvider(create: (context) => AuthController()),
         ChangeNotifierProvider<AppStateProvider>(create: (context) => AppStateProvider(context.read<AppStorageService>())),
       ],
       child: MaterialApp.router(

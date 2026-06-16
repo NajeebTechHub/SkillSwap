@@ -55,9 +55,7 @@ class _SignupPageState extends State<SignupPage> {
 
     if(!mounted) return;
 
-    if(success){
-      context.go(RouteNames.home);
-    }else{
+    if(!success){
       AppToast.showToast(message: controller.errorMessage ?? 'Sign up failed');
     }
   }
