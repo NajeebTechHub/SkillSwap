@@ -18,7 +18,7 @@ class AlertPage extends StatelessWidget {
         actions: [
           IconButton(onPressed: (){}, icon: Text(AppString.markAllRead,style: context.appTextTheme.labelSmall?.copyWith(color: context.colors.primary),))
         ],
-        bottom: PreferredSize(preferredSize: const Size.fromHeight(AppSpacing.md), child: Divider(color: context.colors.outline,)),
+        bottom: PreferredSize(preferredSize: const Size.fromHeight(AppSpacing.md), child: Divider(color: context.colors.outline,height: 0,)),
       ),
       body: ListView.separated(
         itemCount: notifications.length,

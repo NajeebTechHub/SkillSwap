@@ -7,11 +7,11 @@ class PostSkillProvider extends ChangeNotifier{
 
   PostSkillProvider(this._service);
 
-  PostSkillModel? _skill;
+  List<PostSkillModel> _skill = [];
   bool? _loading = false;
   String? _error;
 
-  PostSkillModel? get skill => _skill;
+  List<PostSkillModel> get skill => _skill;
   bool? get loading => _loading;
   String? get error => _error;
 
@@ -23,6 +23,23 @@ class PostSkillProvider extends ChangeNotifier{
       notifyListeners();
 
       await _service.postSkill(skill);
+
+    }catch (e) {
+
+      _error = e.toString();
+    }finally{
+      _loading = false;
+      notifyListeners();
+    }
+  }
+
+  Future<void> loadSkills()async{
+    try{
+      _loading = true;
+      _error = null;
+      notifyListeners();
+
+      _skill = await _service.getAllSkills();
 
     }catch(e){
       _error = e.toString();

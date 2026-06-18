@@ -40,7 +40,6 @@ class PostSkillModel {
 
   Map<String, dynamic> toJson(){
     return {
-      'id' : id,
       'user_id' : userId,
       'skill_name' : skillName,
       'category' : category,
@@ -48,7 +47,6 @@ class PostSkillModel {
       'type' : type,
       'level' : level,
       'description' : description,
-      'created_at' : createdAt,
       'price' : price
     };
   }

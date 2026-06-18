@@ -7,7 +7,7 @@ import 'package:skill_swap/core/services/supabase_service.dart';
 import 'package:skill_swap/core/theme/app_theme.dart';
 import 'package:skill_swap/features/auth/presentation/controller/auth_controller.dart';
 import 'package:skill_swap/features/post_skill/data/post_skill_service.dart';
-import 'package:skill_swap/features/post_skill/presentation/controller/post_skill_controller.dart';
+import 'package:skill_swap/features/post_skill/presentation/controller/post_skill_provider.dart';
 import 'package:skill_swap/features/profile/data/profile_service.dart';
 import 'package:skill_swap/features/profile/presentation/controller/profile_provider.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';

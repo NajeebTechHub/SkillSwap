@@ -11,6 +11,7 @@ import 'package:skill_swap/features/home/presentation/widgets/categories.dart';
 import 'package:skill_swap/features/home/presentation/widgets/featured_mentors.dart';
 import 'package:skill_swap/features/home/presentation/widgets/header.dart';
 import 'package:skill_swap/features/home/presentation/widgets/top_rated.dart';
+import 'package:skill_swap/features/post_skill/presentation/controller/post_skill_provider.dart';
 import 'package:skill_swap/features/profile/presentation/controller/profile_provider.dart';
 
 class HomePage extends StatefulWidget {
@@ -31,21 +32,21 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    Future.microtask((){
+      context.read<PostSkillProvider>();
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     final profile = context.watch<ProfileProvider>().profile;
 
-    if(profile == null){
-      return const Scaffold(body: CircularProgressIndicator());
-    }
 
     return Scaffold(
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Header(searchController: _searchController,profile: profile,),
+          Header(searchController: _searchController,profile: profile!,),
           // const SizedBox(height: AppSpacing.xl),
           Expanded(
             child: SingleChildScrollView(
@@ -71,7 +72,13 @@ class _HomePageState extends State<HomePage> {
                   ),
                   const SizedBox(height: AppSpacing.md),
 
-                  FeaturedMentors(featuredMentors: featuredMentors,),
+                  Consumer<PostSkillProvider>(
+
+                      builder: (context, skill, _){
+                        return FeaturedMentors(featuredMentors: featuredMentors,);
+                      }),
+
+
 
                   const SizedBox(height: AppSpacing.xl),
                   Row(
