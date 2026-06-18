@@ -6,6 +6,11 @@ import 'package:skill_swap/core/services/app_storage_service.dart';
 import 'package:skill_swap/core/services/supabase_service.dart';
 import 'package:skill_swap/core/theme/app_theme.dart';
 import 'package:skill_swap/features/auth/presentation/controller/auth_controller.dart';
+import 'package:skill_swap/features/post_skill/data/post_skill_service.dart';
+import 'package:skill_swap/features/post_skill/presentation/controller/post_skill_controller.dart';
+import 'package:skill_swap/features/profile/data/profile_service.dart';
+import 'package:skill_swap/features/profile/presentation/controller/profile_provider.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 void main()async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -32,6 +37,8 @@ class MyApp extends StatelessWidget {
         Provider<AppStorageService>(create: (context) => AppStorageService()),
         ChangeNotifierProvider(create: (context) => AuthController()),
         ChangeNotifierProvider<AppStateProvider>(create: (context) => AppStateProvider(context.read<AppStorageService>())),
+        ChangeNotifierProvider(create: (context) => ProfileProvider(ProfileService(Supabase.instance.client))),
+        ChangeNotifierProvider(create: (context) => PostSkillProvider(PostSkillService(Supabase.instance.client)))
       ],
       child: MaterialApp.router(
         routerConfig: AppRouter.router,

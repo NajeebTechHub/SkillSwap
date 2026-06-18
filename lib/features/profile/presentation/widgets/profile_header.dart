@@ -5,12 +5,15 @@ import 'package:skill_swap/core/constants/app_sizes.dart';
 import 'package:skill_swap/core/constants/app_spacing.dart';
 import 'package:skill_swap/core/constants/app_string.dart';
 import 'package:skill_swap/core/extensions/context_theme.dart';
+import 'package:skill_swap/core/utils/helper/app_helper.dart';
 import 'package:skill_swap/core/widgets/app_button.dart';
+import 'package:skill_swap/features/profile/models/profile_model.dart';
 import 'package:skill_swap/features/profile/models/states_model.dart';
 
 class ProfileHeader extends StatelessWidget {
   final List<StatesModel> states;
-  const ProfileHeader({super.key, required this.states});
+  final ProfileModel profile;
+  const ProfileHeader({super.key, required this.states, required this.profile});
 
   @override
   Widget build(BuildContext context) {
@@ -43,12 +46,13 @@ class ProfileHeader extends StatelessWidget {
                     Stack(
                       children: [
                         Container(
-                          padding: const EdgeInsets.all(AppSpacing.md),
+                          width: 40,
+                          height: 40,
                           decoration: BoxDecoration(
                               gradient: LinearGradient(colors: [context.colors.primary, context.colors.secondary]),
                               borderRadius: AppRadius.circleRadius
                           ),
-                          child: Text('NJ',style: context.appTextTheme.titleSmall?.copyWith(color: context.colors.surface),),
+                          child: Center(child: Text(AppHelper.getInitials(profile.name),style: context.appTextTheme.titleSmall?.copyWith(color: context.colors.surface),)),
                         ),
                         Positioned(
                             bottom: 0,
@@ -71,9 +75,9 @@ class ProfileHeader extends StatelessWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('Najeeb Anjum',style: context.appTextTheme.titleMedium,),
+                        Text(profile.name,style: context.appTextTheme.titleMedium,),
                         const SizedBox(height: AppSpacing.xs,),
-                        Text('najeeb@gmail.com',style: context.appTextTheme.labelMedium,)
+                        Text(profile.email,style: context.appTextTheme.labelMedium,)
                       ],
                     ),
 

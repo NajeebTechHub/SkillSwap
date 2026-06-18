@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:skill_swap/core/constants/app_spacing.dart';
 import 'package:skill_swap/core/constants/app_string.dart';
 import 'package:skill_swap/core/extensions/context_theme.dart';
@@ -10,6 +11,7 @@ import 'package:skill_swap/features/home/presentation/widgets/categories.dart';
 import 'package:skill_swap/features/home/presentation/widgets/featured_mentors.dart';
 import 'package:skill_swap/features/home/presentation/widgets/header.dart';
 import 'package:skill_swap/features/home/presentation/widgets/top_rated.dart';
+import 'package:skill_swap/features/profile/presentation/controller/profile_provider.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -24,13 +26,26 @@ class _HomePageState extends State<HomePage> {
   final List<CategoryModel> categories = CategoriesData.categories;
   final List<MentorModel> featuredMentors = MentorData.mentors;
 
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
+    final profile = context.watch<ProfileProvider>().profile;
+
+    if(profile == null){
+      return const Scaffold(body: CircularProgressIndicator());
+    }
+
     return Scaffold(
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Header(searchController: _searchController,),
+          Header(searchController: _searchController,profile: profile,),
           // const SizedBox(height: AppSpacing.xl),
           Expanded(
             child: SingleChildScrollView(

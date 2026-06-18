@@ -83,4 +83,21 @@ class AppString {
   static const time = 'Time';
   static const totalPrice = 'Total';
   static const continueToPayment = 'Continue to Payment';
+
+  // Post Skills
+  static const category = 'Category';
+  static const chooseCategory = 'choose category';
+  static const skillName = 'Skill Name';
+  static const enterSkillName = 'Skill Name';
+  static const type = 'Type';
+  static const yourType = 'your type';
+  static const level = 'Level';
+  static const yourLevel = 'your level';
+  static const location = 'Location';
+  static const yourLocation = 'your location';
+  static const experience = 'Experience';
+  static const yourExperience = 'your experience';
+  static const aboutYourSkill = 'Tell about your skill';
+  static const price = 'Price';
+  static const yourPrice = 'your price';
 }

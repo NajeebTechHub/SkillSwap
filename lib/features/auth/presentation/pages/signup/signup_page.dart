@@ -58,6 +58,8 @@ class _SignupPageState extends State<SignupPage> {
     if(!success){
       AppToast.showToast(message: controller.errorMessage ?? 'Sign up failed');
     }
+
+    context.go(RouteNames.home);
   }
 
   @override

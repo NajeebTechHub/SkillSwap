@@ -42,6 +42,8 @@ class AppTheme {
         ),
       ),
 
+      scaffoldBackgroundColor: colorScheme.surface,
+
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
           backgroundColor: colorScheme.primary,

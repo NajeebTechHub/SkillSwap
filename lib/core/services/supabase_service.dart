@@ -29,6 +29,16 @@ class SupabaseService {
         password: password
     );
 
+    final user = response.user;
+
+    if(user != null){
+      await _client.from('profiles').insert({
+        'id' : user.id,
+        'name' : fullName,
+        'email' : email
+      });
+    }
+
     return response.user;
   }
 
